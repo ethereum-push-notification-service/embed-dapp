@@ -20,8 +20,10 @@ const EmbedView = ({ headerText, notifications }) => {
               <CloseIcon className="view-close-icon" size="30"/>
             </ViewHeader>
             <ViewBody>
-                <ConnectButton />
-
+                <ConnectPlaceholder>
+                    <ConnectButton />
+                </ConnectPlaceholder>
+                
                 {notifications.map((oneNotification, i) => {
                     const { cta, title, message, app, icon, image, url, blockchain } =
                     oneNotification;
@@ -102,6 +104,11 @@ const HeaderLink = styled.a`
         color: #2b43d8;
     }
 `
+
+const ConnectPlaceholder = styled.div`
+    display: flex;
+    justify-content: center;
+`;
 
 EmbedView.defaultProps = {
     headerText: 'Notifications'
