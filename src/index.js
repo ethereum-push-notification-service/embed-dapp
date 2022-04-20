@@ -56,7 +56,7 @@ const MainAPP = () => {
       <SDKContext.Provider value={appConfig}>
         <Web3ReactProvider getLibrary={getLibrary}>
           <App />
-          <Loader show={initLoading} />
+          {/* <Loader show={initLoading} /> */}
         </Web3ReactProvider>
       </SDKContext.Provider>
     </React.StrictMode>
