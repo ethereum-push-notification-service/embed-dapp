@@ -57,6 +57,7 @@ function App() {
 
   return (
     <EmbedView
+      account={account}
       headerText={sdkContext.headerText}
       notifications={notifications}
       onCloseHandler={onCloseHandler}

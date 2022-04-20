@@ -7,7 +7,7 @@ import { ethers } from "ethers";
 import { Web3ReactProvider } from "@web3-react/core";
 import { SDKContext } from './context';
 import Helpers from './helpers';
-import Loader from './components/Loader';
+// import Loader from './components/Loader';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -18,9 +18,9 @@ function getLibrary(provider) {
 
 const MainAPP = () => {
   const [appConfig, setAppConfig] = useState({});
-  const [initLoading, setInitLoading] = useState(
-    process.env.REACT_APP_TYPE === 'shell' ? false :true
-  );
+  // const [initLoading, setInitLoading] = useState(
+  //   process.env.REACT_APP_TYPE === 'shell' ? false :true
+  // );
 
   function onMessageEventListener(evt) {
     try {
@@ -30,7 +30,7 @@ const MainAPP = () => {
           if (publishedMessage.msgType === 'SDK_CONFIG_INIT') {
             console.warn("SDK_CONFIG_INIT in app: ", publishedMessage.msg);
             setAppConfig(publishedMessage.msg);
-            setInitLoading(false);
+            // setInitLoading(false);
           }
         }
       }
