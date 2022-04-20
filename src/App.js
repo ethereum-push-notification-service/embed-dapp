@@ -5,6 +5,7 @@ import { utils, api } from "@epnsproject/frontend-sdk-staging";
 import { DEFAULT_NOTIFICATIONS } from "./data";
 import EmbedView from './components/EmbedView';
 import { SDKContext } from './context';
+import Helpers from './helpers';
 
 
 const PAGINATION_PARAMS = {
@@ -19,6 +20,15 @@ function App() {
   const { active, account } = useWeb3React();
   const [notifications, setNotifications] = useState([]);
   const sdkContext = useContext(SDKContext);
+
+  const onCloseHandler = () => {
+    Helpers.pusblishMsgToSDK(
+      Helpers.createMsgPayload({
+        msg: ' IFRAME is closed',
+        msgType: 'IFRAME_APP_CLOSE'
+      })
+    );
+  };
 
   /**
    * Fetch notifications for the user
@@ -49,6 +59,7 @@ function App() {
     <EmbedView
       headerText={sdkContext.headerText}
       notifications={notifications}
+      onCloseHandler={onCloseHandler}
     />
   );
 }
