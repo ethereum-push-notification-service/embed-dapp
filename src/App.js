@@ -55,6 +55,8 @@ function App() {
         });
     }, [active]);
 
+  console.info("SDKCONTEXT: ", sdkContext);
+
   return (
     <EmbedView
       account={account}

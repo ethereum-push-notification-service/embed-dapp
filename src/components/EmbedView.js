@@ -14,6 +14,9 @@ const EmbedView = ({
     onCloseHandler,
     account
 }) => {
+
+    console.log("EmbedView: ", headerText);
+
     return (
         <ViewContainer>
             <ViewHeader>
