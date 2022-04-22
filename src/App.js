@@ -24,8 +24,8 @@ function App() {
   const onCloseHandler = () => {
     Helpers.pusblishMsgToSDK(
       Helpers.createMsgPayload({
-        msg: ' IFRAME is closed',
-        msgType: 'IFRAME_APP_CLOSE'
+        msg: 'IFRAME is closed',
+        topic: 'EPNS_SDK_CHANNEL_TOPIC_SDK_IFRAME_APP_CLOSE'
       })
     );
   };

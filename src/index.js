@@ -26,9 +26,9 @@ const MainAPP = () => {
     try {
       if (typeof evt.data === 'string') {
         const publishedMessage = JSON.parse(evt.data);
-        if (publishedMessage && publishedMessage.msgCode === 'EPNS_SDK_PARENT_TO_IFRAME_MSG') {
-          if (publishedMessage.msgType === 'SDK_CONFIG_INIT') {
-            console.warn("SDK_CONFIG_INIT in app: ", publishedMessage.msg);
+        if (publishedMessage && publishedMessage.channel === 'EPNS_SDK_CHANNEL') {
+          if (publishedMessage.topic === 'EPNS_SDK_CHANNEL_TOPIC_SDK_CONFIG_INIT') {
+            console.warn("EPNS_SDK_CHANNEL_TOPIC_SDK_CONFIG_INIT in app: ", publishedMessage.msg);
             setAppConfig(publishedMessage.msg);
             // setInitLoading(false);
           }
@@ -43,7 +43,7 @@ const MainAPP = () => {
     window.addEventListener('message', onMessageEventListener, false);
 
     Helpers.pusblishMsgToSDK(
-      Helpers.createMsgPayload({ msg: ' IFRAME sAPP loaded', msgType: 'IFRAME_APP_LOADED' })
+      Helpers.createMsgPayload({ msg: 'App loaded', topic: 'EPNS_SDK_CHANNEL_TOPIC_IFRAME_APP_LOADED' })
     );      
 
     return () => {
