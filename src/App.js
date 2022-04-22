@@ -49,13 +49,9 @@ function App() {
             ...results,
             ...DEFAULT_NOTIFICATIONS,
           ]);
-          // console.log({ unparsed: results });
-          // console.log({ parsed: response });
           setNotifications(response);
         });
     }, [active]);
-
-  console.info("SDKCONTEXT: ", sdkContext);
 
   return (
     <EmbedView
