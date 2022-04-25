@@ -28,8 +28,8 @@ const MainAPP = () => {
 
 		  const publishedMsg = JSON.parse(evt.data);
 
-      if (publishedMsg.channel === 'EPNS_SDK_CHANNEL') {
-        if (publishedMsg.topic === 'EPNS_SDK_CHANNEL_TOPIC_SDK_CONFIG_INIT') {
+      if (publishedMsg.channel === 'EPNS_SDK_EMBED_CHANNEL') {
+        if (publishedMsg.topic === 'EPNS_SDK_EMBED_CHANNEL_TOPIC_SDK_CONFIG_INIT') {
           setAppConfig(publishedMsg.msg);
           // setInitLoading(false);
         }
@@ -46,7 +46,7 @@ const MainAPP = () => {
 
     const payload = Helpers.createMsgPayload({
       msg: 'App loaded',
-      topic: 'EPNS_SDK_CHANNEL_TOPIC_IFRAME_APP_LOADED'
+      topic: 'EPNS_SDK_EMBED_CHANNEL_TOPIC_IFRAME_APP_LOADED'
     });
 
     Helpers.pusblishMsgToSDK(payload);

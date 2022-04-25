@@ -1,7 +1,7 @@
 const Helpers = {
   createMsgPayload(payload = {}) {
     return {
-      channel: 'EPNS_SDK_CHANNEL',
+      channel: 'EPNS_SDK_EMBED_CHANNEL',
       ...payload
     };
   },

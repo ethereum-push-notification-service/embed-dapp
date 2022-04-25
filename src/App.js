@@ -25,7 +25,7 @@ function App() {
     Helpers.pusblishMsgToSDK(
       Helpers.createMsgPayload({
         msg: 'IFRAME is closed',
-        topic: 'EPNS_SDK_CHANNEL_TOPIC_IFRAME_APP_CLOSED'
+        topic: 'EPNS_SDK_EMBED_CHANNEL_TOPIC_IFRAME_APP_CLOSED'
       })
     );
   };
