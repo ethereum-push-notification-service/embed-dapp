@@ -21,7 +21,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "start:shell": "REACT_APP_TYPE=shell react-scripts start",
+    "start:standalone": "PORT=8080 REACT_APP_TYPE=shell react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",

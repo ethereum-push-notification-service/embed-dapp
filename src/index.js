@@ -24,16 +24,18 @@ const MainAPP = () => {
 
   function onMessageEventListener(evt) {
     try {
-      if (typeof evt.data === 'string') {
-        const publishedMessage = JSON.parse(evt.data);
-        if (publishedMessage && publishedMessage.msgCode === 'EPNS_SDK_PARENT_TO_IFRAME_MSG') {
-          if (publishedMessage.msgType === 'SDK_CONFIG_INIT') {
-            console.warn("SDK_CONFIG_INIT in app: ", publishedMessage.msg);
-            setAppConfig(publishedMessage.msg);
-            // setInitLoading(false);
-          }
+      if (typeof evt.data !== 'string') return null;
+
+		  const publishedMsg = JSON.parse(evt.data);
+
+      if (publishedMsg.channel === 'EPNS_SDK_EMBED_CHANNEL') {
+        if (publishedMsg.topic === 'EPNS_SDK_EMBED_CHANNEL_TOPIC_SDK_CONFIG_INIT') {
+          setAppConfig(publishedMsg.msg);
+          // setInitLoading(false);
         }
       }
+
+
     } catch (err) {
       console.error('something went wrong parsing IFRAME message to the APP.')
     }
@@ -42,9 +44,12 @@ const MainAPP = () => {
   useEffect(() => {
     window.addEventListener('message', onMessageEventListener, false);
 
-    Helpers.pusblishMsgToSDK(
-      Helpers.createMsgPayload({ msg: ' IFRAME sAPP loaded', msgType: 'IFRAME_APP_LOADED' })
-    );      
+    const payload = Helpers.createMsgPayload({
+      msg: 'App loaded',
+      topic: 'EPNS_SDK_EMBED_CHANNEL_TOPIC_IFRAME_APP_LOADED'
+    });
+
+    Helpers.pusblishMsgToSDK(payload);
 
     return () => {
       window.removeEventListener('message', onMessageEventListener, false);
