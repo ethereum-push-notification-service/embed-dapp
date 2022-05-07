@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/embed-dapp/static/css/main.efee37af.css",
-    "main.js": "/embed-dapp/static/js/main.119ff384.js",
+    "main.css": "/embed-dapp/static/css/main.59219ac3.css",
+    "main.js": "/embed-dapp/static/js/main.7a0dcecc.js",
     "static/js/787.935561cf.chunk.js": "/embed-dapp/static/js/787.935561cf.chunk.js",
     "static/media/metamask.svg": "/embed-dapp/static/media/metamask.09e5f554ca7f2e9f93b4d3c237976b65.svg",
     "index.html": "/embed-dapp/index.html",
-    "main.efee37af.css.map": "/embed-dapp/static/css/main.efee37af.css.map",
-    "main.119ff384.js.map": "/embed-dapp/static/js/main.119ff384.js.map",
+    "main.59219ac3.css.map": "/embed-dapp/static/css/main.59219ac3.css.map",
+    "main.7a0dcecc.js.map": "/embed-dapp/static/js/main.7a0dcecc.js.map",
     "787.935561cf.chunk.js.map": "/embed-dapp/static/js/787.935561cf.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.efee37af.css",
-    "static/js/main.119ff384.js"
+    "static/css/main.59219ac3.css",
+    "static/js/main.7a0dcecc.js"
   ]
 }
