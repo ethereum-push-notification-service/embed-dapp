@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Spinner } from '@styled-icons/icomoon/Spinner';
+import { Spinner3 } from '@styled-icons/evil/Spinner3';
 
 
 const Loader = ({ show }) => {
@@ -8,7 +8,7 @@ const Loader = ({ show }) => {
 
     return (
         <LoadingOverlay>
-            <Spinner className="spinner rotate" size="50"/>
+            <Spinner3 className="spinner rotate" size="50"/>
         </LoadingOverlay>
     );
 };
@@ -19,7 +19,7 @@ const LoadingOverlay = styled.div`
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #ffffff;
+    background-color: ;
     display: flex;
     justify-content: center;
     align-items: center;

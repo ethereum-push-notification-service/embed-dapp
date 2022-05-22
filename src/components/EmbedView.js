@@ -4,20 +4,23 @@ import { Open as OpenIcon } from '@styled-icons/fluentui-system-filled/Open'
 import { Close as CloseIcon } from '@styled-icons/evil/Close';
 import { NotificationItem } from "@epnsproject/frontend-sdk-staging";
 import ConnectButton from "./connect";
+import Loader from './Loader';
+import NoNotifications from './NoNotifications';
 
-// change later to config
-const epnsLink = 'https://staging-app.epns.io/';
 
 const EmbedView = ({
+    isLoading,
     headerText,
     notifications,
     onCloseHandler,
-    account
+    account,
+    isNetworkSupported,
+    config
 }) => {
     return (
         <ViewContainer>
             <ViewHeader>
-              <HeaderLink href={epnsLink} target="_blank" title={epnsLink}>
+              <HeaderLink href={config?.appLink} target="_blank" title={config?.appLink}>
                   <span>{headerText}</span>
                   <OpenIcon className="view-link-icon" size="20"/>
               </HeaderLink>
@@ -31,29 +34,42 @@ const EmbedView = ({
                     </ConnectPlaceholder>
                 ) : null}
 
-                {notifications.map((oneNotification, i) => {
-                    const { cta, title, message, app, icon, image, url, blockchain } =
-                    oneNotification;
 
-                    // render the notification item
-                    return (
-                    <NotificationItem
-                        key={i}
-                        notificationTitle={title}
-                        notificationBody={message}
-                        cta={cta}
-                        app={app}
-                        icon={icon}
-                        image={image}
-                        url={url}
-                        // optional parameters for rendering spambox
-                        isSpam={i === notifications.length - 1}
-                        subscribeFn={async () => alert("yayy")}
-                        isSubscribedFn={async () => false}
-                        chainName={blockchain}
-                    />
-                    );
-                })}
+                {isNetworkSupported && !isLoading ? (
+                    <NotificationsSection>
+                        {(Array.isArray(notifications) && notifications.length > 0) ? (
+                            notifications.map((oneNotification, i) => {
+                                const {
+                                    cta,
+                                    title,
+                                    message,
+                                    app,
+                                    icon,
+                                    image,
+                                    url,
+                                    blockchain
+                                } = oneNotification;
+                                // render the notification item
+                                return (
+                                    <NotificationItem
+                                        key={i}
+                                        notificationTitle={title}
+                                        notificationBody={message}
+                                        cta={cta}
+                                        app={app}
+                                        icon={icon}
+                                        image={image}
+                                        url={url}
+                                        chainName={blockchain}
+                                    />
+                                );
+                            })
+                        ) : <NoNotifications />
+                        }
+                    </NotificationsSection>
+                ) : null}
+
+                {isLoading ? <Loader show /> : null}
             </ViewBody>
         </ViewContainer>
     );
@@ -115,6 +131,11 @@ const HeaderLink = styled.a`
 const ConnectPlaceholder = styled.div`
     display: flex;
     justify-content: center;
+`;
+
+const NotificationsSection = styled.div`
+  display: flex;
+  flex-direction: column;
 `;
 
 EmbedView.defaultProps = {

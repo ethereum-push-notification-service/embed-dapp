@@ -2,10 +2,10 @@ import './App.css';
 import { useContext, useEffect, useState } from "react";
 import { useWeb3React } from "@web3-react/core";
 import { utils, api } from "@epnsproject/frontend-sdk-staging";
-import { DEFAULT_NOTIFICATIONS } from "./data";
 import EmbedView from './components/EmbedView';
 import { SDKContext } from './context';
 import Helpers from './helpers';
+import CONFIG from './config';
 
 
 const PAGINATION_PARAMS = {
@@ -13,13 +13,14 @@ const PAGINATION_PARAMS = {
   itemsPerPage: 20,
 };
 
-const BASE_URL = "https://backend-kovan.epns.io/apis";
-
-
 function App() {
-  const { active, account } = useWeb3React();
-  const [notifications, setNotifications] = useState([]);
+  const { active, account, chainId } = useWeb3React();
   const sdkContext = useContext(SDKContext);
+  const [config, setConfig] = useState({});
+
+  const [isLoading, setIsLoading] = useState(true);
+  const [notifications, setNotifications] = useState([]);
+  const [isNetworkSupported, setIsNetworkSupported] = useState(false);
 
   const onCloseHandler = () => {
     Helpers.pusblishMsgToSDK(
@@ -30,35 +31,52 @@ function App() {
     );
   };
 
-  /**
-   * Fetch notifications for the user
-   */
-    useEffect(() => {
-      if (!active) return;
-      // on page load, fetch all the notifications
-      api
-        .fetchNotifications(
+
+  useEffect(() => {
+    setConfig(CONFIG[chainId])
+    setIsNetworkSupported(!!CONFIG[chainId]);
+  }, [chainId]);
+
+
+  useEffect(() => {
+    const bootstrap = async () => {
+      setIsLoading(true);
+      try {
+        // should we fetch notifications only if the user is subscribed to the channel
+        const { results } = await api.fetchNotifications(
           account,
           PAGINATION_PARAMS.itemsPerPage,
           PAGINATION_PARAMS.page,
-          BASE_URL
+          CONFIG[chainId].API_BASE_URL
         )
-        .then((notificationsData) => {
-          const { results } = notificationsData || {};
-          const response = utils.parseApiResponse([
-            ...results,
-            ...DEFAULT_NOTIFICATIONS,
-          ]);
-          setNotifications(response);
-        });
-    }, [active]);
+  
+        const response = utils.parseApiResponse(results);
+  
+        setNotifications(response || []);
+      } catch (e) {
+        console.error('something went wrong: ', e);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+    
+    
+    if (active && account && chainId && config) {
+      bootstrap();
+    }
+  }, [active, account, chainId, config, sdkContext.channelAddress]);
+
+  console.log('config: ', config)
 
   return (
     <EmbedView
+      isLoading={isLoading}
       account={account}
       headerText={sdkContext.headerText}
+      config={config}
       notifications={notifications}
       onCloseHandler={onCloseHandler}
+      isNetworkSupported={isNetworkSupported}
     />
   );
 }

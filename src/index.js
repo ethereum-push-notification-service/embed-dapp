@@ -17,7 +17,7 @@ function getLibrary(provider) {
 }
 
 const MainAPP = () => {
-  const [appConfig, setAppConfig] = useState({});
+  const [sdkConfig, setSDKConfig] = useState({});
   // const [initLoading, setInitLoading] = useState(
   //   process.env.REACT_APP_TYPE === 'shell' ? false :true
   // );
@@ -30,7 +30,7 @@ const MainAPP = () => {
 
       if (publishedMsg.channel === 'EPNS_SDK_EMBED_CHANNEL') {
         if (publishedMsg.topic === 'EPNS_SDK_EMBED_CHANNEL_TOPIC_SDK_CONFIG_INIT') {
-          setAppConfig(publishedMsg.msg);
+          setSDKConfig(publishedMsg.msg);
           // setInitLoading(false);
         }
       }
@@ -58,7 +58,7 @@ const MainAPP = () => {
 
   return (
     <React.StrictMode>
-      <SDKContext.Provider value={appConfig}>
+      <SDKContext.Provider value={sdkConfig}>
         <Web3ReactProvider getLibrary={getLibrary}>
           <App />
           {/* <Loader show={initLoading} /> */}
