@@ -27,24 +27,25 @@ const Span = styled.span`
   bottom: ${props => props.bottom || 'auto'};
   top: ${props => props.top || 'auto'};
   z-index: ${props => props.z || 'auto'};
-`
+`;
 
 const A = styled.a`
   text-decoration: none;
   margin: 0;
   padding: 0;
+  &:hover {
+    opacity: 0.9;
+  }
 `;
 
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 20px;
-`;
 
-const Content = styled.p`
-  display: flex;
-  gap: 10px;
-  align-items: center;
+  & h3 {
+    font-weight: 400;
+    font-size: 1.1rem;
+  }
 `;
 
 const FancyLink = () => {
@@ -62,7 +63,7 @@ const FancyLink = () => {
 const NoNotifications = () => {
     return (
         <Container>
-            <div>You have no notifications!</div>
+            <h3>You have no notifications!</h3>
             <p>Please checkout our in-depth tutorial on how to opt-in for notifications.</p>  
             <FancyLink />
         </Container>
