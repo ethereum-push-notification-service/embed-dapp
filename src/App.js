@@ -48,7 +48,7 @@ function App() {
           account,
           PAGINATION_PARAMS.itemsPerPage,
           PAGINATION_PARAMS.page,
-          CONFIG[chainId].API_BASE_URL
+          config.API_BASE_URL
         )
   
         const response = utils.parseApiResponse(results);
@@ -67,7 +67,9 @@ function App() {
     }
     
     if (active && account && chainId && config) {
-      bootstrap();
+      if (!Helpers.isObjectEmpty(config)) {
+        bootstrap();
+      }
     }
   }, [active, account, chainId, config, sdkContext.channelAddress]);
 

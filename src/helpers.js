@@ -12,6 +12,9 @@ const Helpers = {
         console.warn('[embed-dapp] something went wrong while passing msg to SDK', error);
     }
   },
+  isObjectEmpty(obj) {
+    return Object.keys(obj).length === 0;
+  }
 }
 
 export default Helpers;
