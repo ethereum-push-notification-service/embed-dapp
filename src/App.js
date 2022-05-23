@@ -6,6 +6,7 @@ import EmbedView from './components/EmbedView';
 import { SDKContext } from './context';
 import Helpers from './helpers';
 import CONFIG from './config';
+import { DEFAULT_NOTIFICATIONS } from './data';
 
 
 const PAGINATION_PARAMS = {
@@ -18,7 +19,7 @@ function App() {
   const sdkContext = useContext(SDKContext);
   const [config, setConfig] = useState({});
 
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [notifications, setNotifications] = useState([]);
   const [isNetworkSupported, setIsNetworkSupported] = useState(false);
 
@@ -51,6 +52,11 @@ function App() {
         )
   
         const response = utils.parseApiResponse(results);
+        // for testing
+        // let response = utils.parseApiResponse([
+        //   ...results,
+        //   ...DEFAULT_NOTIFICATIONS,
+        // ]);
   
         setNotifications(response || []);
       } catch (e) {
@@ -60,13 +66,10 @@ function App() {
       }
     }
     
-    
     if (active && account && chainId && config) {
       bootstrap();
     }
   }, [active, account, chainId, config, sdkContext.channelAddress]);
-
-  console.log('config: ', config)
 
   return (
     <EmbedView

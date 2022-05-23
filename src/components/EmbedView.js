@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Open as OpenIcon } from '@styled-icons/fluentui-system-filled/Open'
 import { Close as CloseIcon } from '@styled-icons/evil/Close';
+import { Warning } from '@styled-icons/entypo/Warning'
 import { NotificationItem } from "@epnsproject/frontend-sdk-staging";
 import ConnectButton from "./connect";
 import Loader from './Loader';
@@ -69,6 +70,13 @@ const EmbedView = ({
                     </NotificationsSection>
                 ) : null}
 
+                {!isNetworkSupported ? (
+                    <WarningMessage>
+                      <Warning color="orange" height={26} width={26} />
+                      <span>Unsupported Network!</span>
+                    </WarningMessage>
+                ) : null}
+
                 {isLoading ? <Loader show /> : null}
             </ViewBody>
         </ViewContainer>
@@ -110,6 +118,7 @@ const ViewBody = styled.main`
     flex-grow: 1;
     overflow-y: auto;
     padding: 15px;
+    position: relative;
 `;
 
 const HeaderLink = styled.a`
@@ -136,6 +145,16 @@ const ConnectPlaceholder = styled.div`
 const NotificationsSection = styled.div`
   display: flex;
   flex-direction: column;
+`;
+
+const WarningMessage = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  & span {
+      margin-left: 6px;
+  }
 `;
 
 EmbedView.defaultProps = {
