@@ -11,7 +11,7 @@ import { DEFAULT_NOTIFICATIONS } from './data';
 
 const PAGINATION_PARAMS = {
   page: 1,
-  itemsPerPage: 200,
+  itemsPerPage: 10,
 };
 
 function App() {
