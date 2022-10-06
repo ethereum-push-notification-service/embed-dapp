@@ -1,7 +1,7 @@
 import './App.css';
 import { useContext, useEffect, useState } from "react";
 import { useWeb3React } from "@web3-react/core";
-import { utils, api } from "@epnsproject/frontend-sdk-staging";
+import * as PushAPI from "@pushprotocol/restapi";
 import EmbedView from './components/EmbedView';
 import { SDKContext } from './context';
 import Helpers from './helpers';
@@ -44,21 +44,12 @@ function App() {
       setIsLoading(true);
       try {
         // should we fetch notifications only if the user is subscribed to the channel
-        const { results } = await api.fetchNotifications(
-          account,
-          PAGINATION_PARAMS.itemsPerPage,
-          PAGINATION_PARAMS.page,
-          config.API_BASE_URL
-        )
+        const notifications = await PushAPI.user.getFeeds({
+          user: `eip155:${chainId}:${account}`,
+          env: config.APP_ENV
+        });
   
-        const response = utils.parseApiResponse(results);
-        // for testing
-        // let response = utils.parseApiResponse([
-        //   ...results,
-        //   ...DEFAULT_NOTIFICATIONS,
-        // ]);
-  
-        setNotifications(response || []);
+        setNotifications(notifications);
       } catch (e) {
         console.error('something went wrong: ', e);
       } finally {

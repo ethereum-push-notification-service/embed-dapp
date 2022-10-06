@@ -1,11 +1,13 @@
 const CONFIG = {
-    42: {
-      API_BASE_URL: "https://backend-kovan.epns.io/apis",
-      APP_LINK: "https://staging-app.epns.io/"
+    5: {
+      API_BASE_URL: "https://backend-staging.epns.io/apis",
+      APP_LINK: "https://staging.push.org/",
+      APP_ENV: "staging"
     },
     1: {
-      API_BASE_URL: "https://backend-prod.epns.io/apis",
-      APP_LINK: "https://app.epns.io/"
+      API_BASE_URL: "https://backend.epns.io/apis",
+      APP_LINK: "https://app.push.org/",
+      APP_ENV: "prod"
     }
 };
 

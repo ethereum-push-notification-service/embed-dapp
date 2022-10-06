@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Open as OpenIcon } from '@styled-icons/fluentui-system-filled/Open'
 import { Close as CloseIcon } from '@styled-icons/evil/Close';
 import { Warning } from '@styled-icons/entypo/Warning'
-import { NotificationItem } from "@epnsproject/frontend-sdk-staging";
+import { NotificationItem } from "@pushprotocol/uiweb";
 import ConnectButton from "./connect";
 import Loader from './Loader';
 import NoNotifications from './NoNotifications';

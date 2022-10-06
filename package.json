@@ -4,7 +4,8 @@
   "private": true,
   "homepage": "https://ethereum-push-notification-service.github.io/embed-dapp",
   "dependencies": {
-    "@epnsproject/frontend-sdk-staging": "^1.8.5",
+    "@pushprotocol/restapi": "^0.0.4",
+    "@pushprotocol/uiweb": "^0.0.1",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.1.1",
     "@testing-library/user-event": "^13.5.0",
@@ -20,8 +21,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "start:standalone": "PORT=8080 REACT_APP_TYPE=shell react-scripts start",
+    "start": "GENERATE_SOURCEMAP=false react-scripts start",
+    "start:standalone": "GENERATE_SOURCEMAP=false PORT=8080 REACT_APP_TYPE=shell react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
@@ -47,6 +48,7 @@
     ]
   },
   "devDependencies": {
-    "gh-pages": "^3.2.3"
+    "gh-pages": "^3.2.3",
+    "sass": "^1.55.0"
   }
 }

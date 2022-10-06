@@ -1,5 +1,5 @@
 # About
-POC Embed Dapp for EPNS FE-SDK
+POC Embed Dapp for PUSH FE-SDK
 
 **NOTE:**
 only for demo purpose.
