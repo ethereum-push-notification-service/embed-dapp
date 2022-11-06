@@ -62,7 +62,7 @@ function App() {
         bootstrap();
       }
     }
-  }, [active, account, chainId, config, sdkContext.channelAddress]);
+  }, [active, account, config, sdkContext.channelAddress]);
 
   return (
     <EmbedView
